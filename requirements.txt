@@ -1,0 +1,3 @@
+fabric
+pyyaml
+git+git://github.com/pjdufour/python-cli-util.git@master
