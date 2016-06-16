@@ -18,8 +18,8 @@ SRID="EPSG:4326"
 # Prepare Database
 SCHEMAS="gaul;wfp;context;cyclone;flood;drought;landslide;conflict"
 SCHEMAS_SEP=";"
-#fab $TARGET \
-#pipeline_sql_schemas:schemas=$SCHEMAS,sep=$SCHEMAS_SEP
+fab $TARGET \
+pipeline_sql_schemas:schemas=$SCHEMAS,sep=$SCHEMAS_SEP
 ##########################
 # Reload Admin District, Boundaries, etc.
 echo

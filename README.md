@@ -39,7 +39,30 @@ Follow directions at http://www.fabfile.org/installing.html to install fabric or
 sudo pip install fabric
 ```
 
-TBD: Info on creating YAML config files.
+# Configuration
+
+Before you run pipeline commands, such as `shp`, `sql`, etc. you'll need to set up your target environment configurations and add the command to load the configuration to your fabfile.py.  The fab commands for `prod` (for production) and `dev` (for development) are already in the fabfile.py.  You'll need to add the configurations to `env/prod.yml` and `env/dev.yml`.  For example, here is the configuration for a local vagrant development machine.
+
+```
+---
+disable_known_hosts: True
+hosts:
+  - localhost:2222
+user: vagrant
+group: vagrant
+password:
+key_filename: "~/workspaces/public/sparc2-ansible.git/.vagrant/machines/default/virtualbox/private_key"
+
+sparc2:
+  user: vagrant
+  venv: "/home/vagrant/.venvs/sparc2"
+  db:
+    host: localhost
+    name: sparc2
+    user: sparc2
+    password: sparc2
+
+```
 
 # Usage
 
@@ -48,9 +71,6 @@ TBD: Info on creating YAML config files.
 [Fabric](http://www.fabfile.org/) provides an easy command line interface for executing remote shell commands and for transferring files between machines.  For SPARC 2.x, Fabric can be used to import and export data.
 
 To get started, change directory (`cd`) into the main directory with the `fabfile.py`.  When you call fab, start with `dev` or `prod` so that the host and identity key are loaded automatically.
-
-
-
 
 
 To see a list of tasks run:
