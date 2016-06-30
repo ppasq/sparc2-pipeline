@@ -24,9 +24,9 @@ SELECT
     iso_alpha3,
     admin0_code,
     admin0_name,
-    CASE WHEN length(array_to_string(array_agg(CYCLONE.ogc_fid),',')) > 0 THEN 1 ELSE 0 END as cyclone,
+    CASE WHEN length(array_to_string(array_agg(CYCLONE.ogc_fid),',')) > 0 THEN 1 ELSE 0 END as cyclone
     --CASE WHEN length(array_to_string(array_agg(FLOOD.ogc_fid),',')) > 0 THEN 1 ELSE 0 END as flood
-    --CASE WHEN array_agg(LANDSLIDE.ogc_fid) IS NULL THEN 0 ELSE 1 END as landslide
+    --CASE WHEN length(array_to_string(array_agg(LANDSLIDE.ogc_fid),',')) > 0 THEN 1 ELSE 0 END as landslide
 FROM gaul_admin0_with_isoalpha3 as G
 LEFT JOIN cyclone.events as CYCLONE ON st_intersects(CYCLONE.wkb_geometry, G.geom)
 --LEFT JOIN flood.events as FLOOD ON st_intersects(FLOOD.wkb_geometry, G.geom)
