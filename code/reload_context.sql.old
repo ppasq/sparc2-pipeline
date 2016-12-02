@@ -27,12 +27,11 @@ INSERT INTO context.admin2_context (
 )
 SELECT
     iso3,
-    A.ADM0_CODE, g.adm0_name, A.ADM1_CODE, G.adm1_name, A.ADM2_CODE, G.adm2_name,
-    NCH1_12, PCH1_12, MEAN_12,
-    FOR_2,
-    CROP_2,
-    EROSION1_2,
-    LDI,
-    NOCHNG_2
-    FROM context.admin2_polygons as A
-    LEFT JOIN gaul.admin2_polygons as G ON A.ADM2_CODE = G.adm2_code;
+    adm0_code, adm0_name, adm1_code, adm1_name, adm2_code, adm2_name,
+    nch1_12, pch1_12, mean_12,
+    For_2,
+    Crop_2,
+    erosion1_2,
+    ldi,
+    nochng_2
+FROM context.admin2_polygons;

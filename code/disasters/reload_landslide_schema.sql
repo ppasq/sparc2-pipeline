@@ -7,17 +7,9 @@ CREATE TABLE IF NOT EXISTS landslide.admin2_popatrisk (
     admin1_code text,
     admin2_code text,
     admin2_name text,
-    jan integer,
-    feb integer,
-    mar integer,
-    apr integer,
-    may integer,
-    jun integer,
-    jul integer,
-    aug integer,
-    sep integer,
-    oct integer,
-    nov integer,
-    "dec" integer,
+    month character(3),
+    prob_class_text text, -- low, medium, high, or very_high
+    prob_class_int integer, -- 1, 2, 3, 4
+    popatrisk integer,
     CONSTRAINT admin2_popatrisk_pkey PRIMARY KEY (id)
 );

@@ -366,14 +366,17 @@ def _pipeline_import_tables(**kwargs):
                     if f:
                         file_path = os.path.join(drop, f)
                         if op == "replace":
-                            sql = "DELETE FROM {table};".format(table=table)
-                            cmd = "PGPASSWORD='{password}' psql -U {user} -d {dbname} -c \"{sql}\"".format(** {
-                                "sql": sql,
-                                "password": env["sparc2_db_password"],
-                                "user": env["sparc2_db_user"],
-                                "dbname":  env["sparc2_db_name"]
-                            })
-                            run(cmd)
+                            try:
+                                sql = "DELETE FROM {table};".format(table=table)
+                                cmd = "PGPASSWORD='{password}' psql -U {user} -d {dbname} -c \"{sql}\"".format(** {
+                                    "sql": sql,
+                                    "password": env["sparc2_db_password"],
+                                    "user": env["sparc2_db_user"],
+                                    "dbname":  env["sparc2_db_name"]
+                                })
+                                run(cmd)
+                            except:
+                                print "Tried to delete from non-existant table "+table+"."
 
                         sql = "COPY {table} FROM STDIN DELIMITER '{delimiter}' CSV HEADER;".format(** {
                             "table": table,
@@ -543,14 +546,17 @@ def _pipeline_sql_clear(**kwargs):
 
     if request_continue():
         for table in tables.split(sep):
-            sql = "DELETE FROM {table};".format(table=table)
-            cmd = "PGPASSWORD='{password}' psql -U {user} -d {dbname} -c \"{sql}\"".format(** {
-                "sql": sql,
-                "password": env["sparc2_db_password"],
-                "user": env["sparc2_db_user"],
-                "dbname":  env["sparc2_db_name"]
-            })
-            run(cmd)
+            try:
+                sql = "DELETE FROM {table};".format(table=table)
+                cmd = "PGPASSWORD='{password}' psql -U {user} -d {dbname} -c \"{sql}\"".format(** {
+                    "sql": sql,
+                    "password": env["sparc2_db_password"],
+                    "user": env["sparc2_db_user"],
+                    "dbname":  env["sparc2_db_name"]
+                })
+                run(cmd)
+            except:
+                print "Tried to delete from non-existant table "+table+"."
 
 
 def _pipeline_exec_python(**kwargs):
